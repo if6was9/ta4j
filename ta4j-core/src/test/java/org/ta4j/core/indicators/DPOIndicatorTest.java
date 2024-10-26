@@ -24,10 +24,11 @@
 package org.ta4j.core.indicators;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
@@ -44,7 +45,7 @@ public class DPOIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, Num>
         super(numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         series = new MockBarSeriesBuilder().withNumFactory(numFactory)
                 .withData(22.27, 22.19, 22.08, 22.17, 22.18, 22.13, 22.23, 22.43, 22.24, 22.29, 22.15, 22.39, 22.38,
@@ -76,9 +77,9 @@ public class DPOIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, Num>
         assertNumEquals(0.169999999999999, dpo.getValue(12));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @Test
     public void dpoIOOBE() {
         DPOIndicator dpo = new DPOIndicator(series, 9);
-        dpo.getValue(100);
+        assertThrows(IndexOutOfBoundsException.class, () -> dpo.getValue(100));
     }
 }

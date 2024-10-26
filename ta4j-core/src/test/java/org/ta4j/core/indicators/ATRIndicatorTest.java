@@ -28,7 +28,7 @@ import static org.ta4j.core.TestUtils.assertIndicatorEquals;
 
 import java.time.ZonedDateTime;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.ExternalIndicatorTest;
 import org.ta4j.core.Indicator;

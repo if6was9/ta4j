@@ -26,15 +26,15 @@ package org.ta4j.core.rules;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class BooleanRuleTest {
 
     private BooleanRule satisfiedRule;
     private BooleanRule unsatisfiedRule;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         satisfiedRule = new BooleanRule(true);
         unsatisfiedRule = new BooleanRule(false);

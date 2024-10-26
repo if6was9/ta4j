@@ -25,8 +25,8 @@ package org.ta4j.core.indicators.bollinger;
 
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.AbstractIndicatorTest;
 import org.ta4j.core.indicators.SMAIndicator;
@@ -48,7 +48,7 @@ public class BollingerBandsLowerIndicatorTest extends AbstractIndicatorTest<Indi
         super(null, numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         var data = new MockBarSeriesBuilder().withNumFactory(numFactory)
                 .withData(1, 2, 3, 4, 3, 4, 5, 4, 3, 3, 4, 3, 2)

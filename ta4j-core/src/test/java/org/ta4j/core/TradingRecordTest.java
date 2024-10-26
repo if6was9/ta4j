@@ -29,14 +29,14 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.ta4j.core.num.NaN.NaN;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class TradingRecordTest {
 
     private TradingRecord emptyRecord, openedRecord, closedRecord;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         emptyRecord = new BaseTradingRecord();
         openedRecord = new BaseTradingRecord(Trade.buyAt(0, NaN, NaN), Trade.sellAt(3, NaN, NaN),

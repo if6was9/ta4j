@@ -26,8 +26,8 @@ package org.ta4j.core.indicators.candles;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.AbstractIndicatorTest;
@@ -43,7 +43,7 @@ public class ThreeWhiteSoldiersIndicatorTest extends AbstractIndicatorTest<Indic
         super(numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         series = new MockBarSeriesBuilder().withNumFactory(numFactory).build();
         series.barBuilder().openPrice(19.0).closePrice(19.0).highPrice(22.0).lowPrice(15.0).add();

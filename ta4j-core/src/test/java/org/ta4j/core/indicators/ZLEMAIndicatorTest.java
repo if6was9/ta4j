@@ -26,8 +26,8 @@ package org.ta4j.core.indicators;
 import static junit.framework.TestCase.assertEquals;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
@@ -43,7 +43,7 @@ public class ZLEMAIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, Nu
         super(numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         data = new MockBarSeriesBuilder().withNumFactory(numFactory)
                 .withData(10, 15, 20, 18, 17, 18, 15, 12, 10, 8, 5, 2)

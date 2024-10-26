@@ -26,8 +26,8 @@ package org.ta4j.core.rules;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseBarSeriesBuilder;
 import org.ta4j.core.Indicator;
@@ -38,7 +38,7 @@ public class IsLowestRuleTest {
 
     private IsLowestRule rule;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         BarSeries series = new BaseBarSeriesBuilder().build();
         Indicator<Num> indicator = new FixedDecimalIndicator(series, 1, -5, 3, -6, 5, -7, 0, -1, 2, -8);

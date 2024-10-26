@@ -42,8 +42,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.mocks.MockBarSeriesBuilder;
 
@@ -54,7 +54,7 @@ public class PivotPointIndicatorTest {
     private BarSeries series1Days;
     private BarSeries series1Weeks;
 
-    @Before
+    @BeforeEach
     public void initDataForDailyBarCount() {
 
         String rawData5Minutes = "2017-09-27,22:00:00,167.86,167.949,167.63,167.68,1746768,0\n"
@@ -627,7 +627,7 @@ public class PivotPointIndicatorTest {
 
     }
 
-    @Before
+    @BeforeEach
     public void initDataForWeeklyBarCount() {
 
         String rawData1Hours = "2017-09-01,16:00:00,172.4,172.55,171.58,171.8,2204582,0\n"
@@ -828,7 +828,7 @@ public class PivotPointIndicatorTest {
 
     }
 
-    @Before
+    @BeforeEach
     public void initDataForMonthlyBarCount() {
         String rawData1Days = "2017/08/18,167.4100,15065590.0000,166.8400,168.6700,166.2100\n"
                 + "2017/08/17,166.9100,17009420.0000,169.3400,169.8600,166.8500\n"
@@ -1012,7 +1012,7 @@ public class PivotPointIndicatorTest {
 
     }
 
-    @Before
+    @BeforeEach
     public void initDataForYearlyBarCount() {
         String rawData1Week = "2012-05-14,42.049999,45.000000,38.000000,38.230000,38.230000,573576400\n"
                 + "2012-05-21,36.529999,36.660000,30.940001,31.910000,31.910000,430966300\n"

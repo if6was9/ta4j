@@ -21,36 +21,26 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package org.ta4j.core.rules;
+package org.ta4j.core.indicators;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.ta4j.core.Indicator;
+import org.ta4j.core.IndicatorFactory;
+import org.ta4j.core.num.*;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.ta4j.core.indicators.helpers.FixedDecimalIndicator;
-import org.ta4j.core.mocks.MockBarSeriesBuilder;
+import java.util.List;
 
-public class UnderIndicatorRuleTest {
+/**
+ * Abstract test class to extend BarSeries, Indicator an other test cases. The
+ * extending class will be called twice. First time with
+ * {@link DecimalNum#valueOf}, second time with {@link DoubleNum#valueOf} as
+ * <code>Function<Number, Num></></code> parameter. This should ensure that the
+ * defined test case is valid for both data types.
+ */
+public abstract class AbstractIndicatorTest2 {
 
-    private UnderIndicatorRule rule;
-
-    @BeforeEach
-    public void setUp() {
-        var series = new MockBarSeriesBuilder().build();
-        var indicator = new FixedDecimalIndicator(series, 0, 5, 8, 5, 1, 10, 20, 30);
-        rule = new UnderIndicatorRule(indicator, series.numFactory().numOf(5));
-    }
-
-    @Test
-    public void isSatisfied() {
-        assertTrue(rule.isSatisfied(0));
-        assertFalse(rule.isSatisfied(1));
-        assertFalse(rule.isSatisfied(2));
-        assertFalse(rule.isSatisfied(3));
-        assertTrue(rule.isSatisfied(4));
-        assertFalse(rule.isSatisfied(5));
-        assertFalse(rule.isSatisfied(6));
-        assertFalse(rule.isSatisfied(7));
+    public static List<NumFactory> getNumFactories() {
+        return List.of(DoubleNumFactory.getInstance(), DecimalNumFactory.getInstance());
     }
 }

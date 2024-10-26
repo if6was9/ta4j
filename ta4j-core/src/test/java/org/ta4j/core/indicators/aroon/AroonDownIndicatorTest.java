@@ -27,8 +27,8 @@ import static junit.framework.TestCase.assertEquals;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 import static org.ta4j.core.num.NaN.NaN;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.AbstractIndicatorTest;
@@ -44,7 +44,7 @@ public class AroonDownIndicatorTest extends AbstractIndicatorTest<Indicator<Num>
         super(null, numFunction);
     }
 
-    @Before
+    @BeforeEach
     public void init() {
         data = new MockBarSeriesBuilder().withNumFactory(numFactory).withName("Aroon data").build();
         data.barBuilder().openPrice(168.28).highPrice(169.87).lowPrice(167.15).closePrice(169.64).volume(0).add();

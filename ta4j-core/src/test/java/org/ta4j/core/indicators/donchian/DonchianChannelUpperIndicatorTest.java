@@ -26,8 +26,8 @@ package org.ta4j.core.indicators.donchian;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.indicators.AbstractIndicatorTest;
 import org.ta4j.core.mocks.MockBarSeriesBuilder;
@@ -42,7 +42,7 @@ public class DonchianChannelUpperIndicatorTest extends AbstractIndicatorTest<Bar
         super(numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.series = new MockBarSeriesBuilder().withNumFactory(numFactory)
                 .withName("DonchianChannelUpperIndicatorTestSeries")

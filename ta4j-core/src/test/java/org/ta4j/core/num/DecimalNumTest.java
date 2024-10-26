@@ -23,8 +23,7 @@
  */
 package org.ta4j.core.num;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 import static org.ta4j.core.TestUtils.assertIndicatorEquals;
 import static org.ta4j.core.TestUtils.assertIndicatorNotEquals;
 import static org.ta4j.core.TestUtils.assertNumEquals;
@@ -33,7 +32,7 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseBarSeriesBuilder;
 import org.ta4j.core.Indicator;
@@ -93,11 +92,13 @@ public class DecimalNumTest {
     private Indicator<Num> doubleIndicator;
     private Indicator<Num> lowPrecisionIndicator;
 
-    @Test(expected = ArithmeticException.class)
+    @Test
     public void testPowOverflowExponent() {
         final Num x = DecimalNum.valueOf("2");
-        final Num n = DecimalNum.valueOf(SUPER_PRECISION_LARGE_STRING);
-        assertNumEquals("1", x.pow(n));
+        assertThrows(ArithmeticException.class, () -> {
+            final Num n = DecimalNum.valueOf(SUPER_PRECISION_LARGE_STRING);
+            assertNumEquals("1", x.pow(n));
+        });
     }
 
     @Test
@@ -317,14 +318,14 @@ public class DecimalNumTest {
         }
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test
     public void testValueOfForFloatNaNShouldThrowNumberFormatException() {
-        DecimalNum.valueOf(Float.NaN);
+        assertThrows(NumberFormatException.class, () -> DecimalNum.valueOf(Float.NaN));
     }
 
-    @Test(expected = NumberFormatException.class)
+    @Test
     public void testValueOfForDoubleNaNShouldThrowNumberFormatException() {
-        DecimalNum.valueOf(Double.NaN);
+        assertThrows(NumberFormatException.class, () -> DecimalNum.valueOf(Double.NaN));
     }
 
     @Test

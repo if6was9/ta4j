@@ -25,8 +25,8 @@ package org.ta4j.core.indicators.supertrend;
 
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.mocks.MockBarSeriesBuilder;
 import org.ta4j.core.num.DoubleNumFactory;
@@ -37,7 +37,7 @@ public class SuperTrendIndicatorTest {
     private BarSeries data;
     private NumFactory numFactory = DoubleNumFactory.getInstance();
 
-    @Before
+    @BeforeEach
     public void setUp() {
         data = new MockBarSeriesBuilder().withNumFactory(numFactory).build();
 

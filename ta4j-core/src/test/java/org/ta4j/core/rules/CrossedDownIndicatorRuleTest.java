@@ -26,8 +26,8 @@ package org.ta4j.core.rules;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseBarSeriesBuilder;
 import org.ta4j.core.indicators.helpers.FixedDecimalIndicator;
@@ -36,7 +36,7 @@ public class CrossedDownIndicatorRuleTest {
 
     private BarSeries series;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         series = new BaseBarSeriesBuilder().build();
     }

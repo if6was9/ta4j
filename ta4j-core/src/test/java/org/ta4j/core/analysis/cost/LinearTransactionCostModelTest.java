@@ -33,8 +33,8 @@ import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BaseBarSeries;
 import org.ta4j.core.BaseBarSeriesBuilder;
 import org.ta4j.core.BaseStrategy;
@@ -54,7 +54,7 @@ public class LinearTransactionCostModelTest {
 
     private CostModel transactionModel;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         transactionModel = new LinearTransactionCostModel(0.01);
     }

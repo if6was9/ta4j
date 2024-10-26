@@ -26,8 +26,8 @@ package org.ta4j.core.rules;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseBarSeriesBuilder;
 import org.ta4j.core.Indicator;
@@ -39,7 +39,7 @@ public class InSlopeRuleTest {
     private InSlopeRule rulePositiveSlope;
     private InSlopeRule ruleNegativeSlope;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         BarSeries series = new BaseBarSeriesBuilder().build();
         Indicator<Num> indicator = new FixedDecimalIndicator(series, 50, 70, 80, 90, 99, 60, 30, 20, 10, 0);

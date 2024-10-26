@@ -28,8 +28,8 @@ import static org.ta4j.core.TestUtils.assertNumEquals;
 
 import java.time.ZonedDateTime;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BaseBarSeries;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.AbstractIndicatorTest;
@@ -46,7 +46,7 @@ public class AroonFacadeTest extends AbstractIndicatorTest<Indicator<Num>, Num> 
         super(numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void init() {
         data = new MockBarSeriesBuilder().withNumFactory(numFactory).withName("Aroon data").build();
         data.barBuilder()

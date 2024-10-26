@@ -32,15 +32,15 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.mocks.MockBarSeriesBuilder;
 
 public class AroonOscillatorIndicatorTest {
     private BarSeries data;
 
-    @Before
+    @BeforeEach
     public void init() {
         String rawData = // fb_daily, 2017/01/03 - 2017/08/18
                 // date, close, volume, open, high, low

@@ -28,8 +28,8 @@ import static org.junit.Assert.assertTrue;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 import static org.ta4j.core.num.NaN.NaN;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.AbstractIndicatorTest;
@@ -45,7 +45,7 @@ public class RelativeVolumeStandardDeviationIndicatorTest extends AbstractIndica
         super(numFunction);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         mockBarSeries = new MockBarSeriesBuilder().withNumFactory(numFactory).build();
         mockBarSeries.barBuilder().openPrice(10).closePrice(9).highPrice(10).lowPrice(9).volume(10).add();

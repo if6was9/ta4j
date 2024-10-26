@@ -25,8 +25,8 @@ package org.ta4j.core.indicators;
 
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
 import org.ta4j.core.mocks.MockBarSeriesBuilder;
@@ -45,7 +45,7 @@ public class ROCIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, Num>
         super(numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         closePrice = new ClosePriceIndicator(
                 new MockBarSeriesBuilder().withNumFactory(numFactory).withData(closePriceValues).build());

@@ -28,8 +28,8 @@ import static org.ta4j.core.TestUtils.assertNumEquals;
 
 import java.time.ZonedDateTime;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.AbstractIndicatorTest;
@@ -47,7 +47,7 @@ public class CorrelationCoefficientIndicatorTest extends AbstractIndicatorTest<I
         super(numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         BarSeries data = new MockBarSeriesBuilder().withNumFactory(numFactory).build();
         int i = 20;

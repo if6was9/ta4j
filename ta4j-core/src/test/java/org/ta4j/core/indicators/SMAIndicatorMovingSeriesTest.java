@@ -26,8 +26,8 @@ package org.ta4j.core.indicators;
 import static org.junit.Assert.assertEquals;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
@@ -43,7 +43,7 @@ public class SMAIndicatorMovingSeriesTest extends AbstractIndicatorTest<Indicato
 
     private BarSeries data;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         data = new MockBarSeriesBuilder().withNumFactory(numFactory).withData(1, 2, 3, 4, 7).build();
         data.setMaximumBarCount(4);

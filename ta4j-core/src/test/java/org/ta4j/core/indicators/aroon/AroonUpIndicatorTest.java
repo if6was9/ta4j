@@ -29,8 +29,8 @@ import static org.ta4j.core.num.NaN.NaN;
 
 import java.time.ZonedDateTime;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.mocks.MockBarSeriesBuilder;
 import org.ta4j.core.num.Num;
@@ -39,7 +39,7 @@ public class AroonUpIndicatorTest {
 
     private BarSeries data;
 
-    @Before
+    @BeforeEach
     public void init() {
         data = new MockBarSeriesBuilder().build();
         data.barBuilder().openPrice(168.28).highPrice(169.87).lowPrice(167.15).closePrice(169.64).volume(0).add();

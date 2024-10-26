@@ -27,8 +27,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.mocks.MockBarSeriesBuilder;
@@ -43,7 +43,7 @@ public class IntraDayMomentumIndexIndicatorTest extends AbstractIndicatorTest<In
         super(numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         mockBarSeries = new MockBarSeriesBuilder().withNumFactory(numFactory).build();
         mockBarSeries.barBuilder().openPrice(10).closePrice(9).highPrice(10).lowPrice(9).add();

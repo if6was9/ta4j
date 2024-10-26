@@ -26,8 +26,8 @@ package org.ta4j.core.rules;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BaseTradingRecord;
 import org.ta4j.core.Trade;
 import org.ta4j.core.TradingRecord;
@@ -37,7 +37,7 @@ public class WaitForRuleTest {
     private TradingRecord tradingRecord;
     private WaitForRule rule;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         tradingRecord = new BaseTradingRecord();
     }

@@ -28,8 +28,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.time.ZonedDateTime;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseTradingRecord;
 import org.ta4j.core.Trade;
@@ -44,7 +44,7 @@ public class AverageTrueRangeStopLossRuleTest {
 
     private BarSeries series;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         series = new MockBarSeriesBuilder().withName("AverageTrueRangeStopLossRuleTest").build();
     }

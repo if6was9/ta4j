@@ -23,10 +23,11 @@
  */
 package org.ta4j.core.indicators;
 
+import static org.junit.Assert.assertThrows;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
@@ -42,7 +43,7 @@ public class MACDIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, Num
 
     private BarSeries data;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         data = new MockBarSeriesBuilder().withNumFactory(numFactory)
                 .withData(37.08, 36.7, 36.11, 35.85, 35.71, 36.04, 36.41, 37.67, 38.01, 37.79, 36.83, 37.10, 38.01,
@@ -50,9 +51,9 @@ public class MACDIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, Num
                 .build();
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void throwsErrorOnIllegalArguments() {
-        new MACDIndicator(new ClosePriceIndicator(data), 10, 5);
+        assertThrows(IllegalArgumentException.class, () -> new MACDIndicator(new ClosePriceIndicator(data), 10, 5));
     }
 
     @Test

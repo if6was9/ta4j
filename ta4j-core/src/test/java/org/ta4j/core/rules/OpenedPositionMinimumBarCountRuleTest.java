@@ -23,25 +23,24 @@
  */
 package org.ta4j.core.rules;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BaseTradingRecord;
 import org.ta4j.core.Trade;
 import org.ta4j.core.mocks.MockBarSeriesBuilder;
 import org.ta4j.core.num.DecimalNumFactory;
 
+import static org.junit.Assert.*;
+
 public class OpenedPositionMinimumBarCountRuleTest {
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testAtLeastBarCountRuleForNegativeNumberShouldThrowException() {
-        new OpenedPositionMinimumBarCountRule(-1);
+        assertThrows(IllegalArgumentException.class, () -> new OpenedPositionMinimumBarCountRule(-1));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testAtLeastBarCountRuleForZeroShouldThrowException() {
-        new OpenedPositionMinimumBarCountRule(0);
+        assertThrows(IllegalArgumentException.class, () -> new OpenedPositionMinimumBarCountRule(0));
     }
 
     @Test

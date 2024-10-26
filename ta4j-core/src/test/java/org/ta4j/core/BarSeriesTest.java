@@ -23,13 +23,7 @@
  */
 package org.ta4j.core;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
 import java.math.BigDecimal;
@@ -41,8 +35,12 @@ import java.util.stream.IntStream;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.ta4j.core.indicators.AbstractIndicatorTest;
+import org.ta4j.core.indicators.AbstractIndicatorTest2;
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
 import org.ta4j.core.indicators.helpers.HighPriceIndicator;
 import org.ta4j.core.indicators.helpers.LowPriceIndicator;
@@ -119,7 +117,8 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
     /**
      * Tests if the addBar(bar, boolean) function works correct.
      */
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void replaceBarTest() {
         var series = new BaseBarSeriesBuilder().withNumFactory(numFactory)
                 .withBarBuilderFactory(new MockBarBuilderFactory())
@@ -156,7 +155,8 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
         assertNumEquals(series.getLastBar().getClosePrice(), series.numFactory().numOf(5));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void getEndGetBeginGetBarCountIsEmptyTest() {
 
         // Default series
@@ -176,7 +176,8 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
         assertTrue(emptySeries.isEmpty());
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void getBarDataTest() {
         // Constrained series
         assertNotEquals(defaultSeries.getBarData(), subSeries.getBarData());
@@ -184,7 +185,8 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
         assertEquals(0, emptySeries.getBarData().size());
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void getSeriesPeriodDescriptionTest() {
         // Default series
         assertTrue(defaultSeries.getSeriesPeriodDescription()
@@ -206,13 +208,15 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
         assertEquals("", emptySeries.getSeriesPeriodDescription());
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void getNameTest() {
         assertEquals(defaultName, defaultSeries.getName());
         assertEquals(defaultName, subSeries.getName());
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void getBarWithRemovedIndexOnMovingSeriesShouldReturnFirstRemainingBarTest() {
         Bar bar = defaultSeries.getBar(4);
         defaultSeries.setMaximumBarCount(2);
@@ -225,31 +229,36 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
         assertNotSame(bar, defaultSeries.getBar(5));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void modificationsOnOriginalListShouldNotAffectBarSeries() {
         defaultSeries.setMaximumBarCount(2);
         assertEquals(2, defaultSeries.getBarCount());
         assertNumEquals(5, defaultSeries.getBar(1).getClosePrice());
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @ParameterizedTest
+    @MethodSource("function")
     public void getBarWithNegativeIndexShouldThrowExceptionTest() {
-        defaultSeries.getBar(-1);
+        assertThrows(IndexOutOfBoundsException.class, () -> defaultSeries.getBar(-1));
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
+    @ParameterizedTest
+    @MethodSource("function")
     public void getBarWithIndexGreaterThanBarCountShouldThrowExceptionTest() {
-        defaultSeries.getBar(10);
+        assertThrows(IndexOutOfBoundsException.class, () -> defaultSeries.getBar(10));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void getBarOnMovingSeriesTest() {
         Bar bar = defaultSeries.getBar(4);
         defaultSeries.setMaximumBarCount(2);
         assertEquals(bar, defaultSeries.getBar(4));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void subSeriesCreationTest() {
         BarSeries subSeries = defaultSeries.getSubSeries(2, 5);
         assertEquals(3, subSeries.getBarCount());
@@ -266,17 +275,20 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
         assertEquals(defaultSeries.getEndIndex(), subSeries.getEndIndex());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @ParameterizedTest
+    @MethodSource("function")
     public void subSeriesCreationWithNegativeIndexTest() {
-        defaultSeries.getSubSeries(-1000, 1000);
+        assertThrows(IllegalArgumentException.class, () -> defaultSeries.getSubSeries(-1000, 1000));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @ParameterizedTest
+    @MethodSource("function")
     public void subSeriesWithWrongArgumentsTest() {
-        defaultSeries.getSubSeries(10, 9);
+        assertThrows(IllegalArgumentException.class, () -> defaultSeries.getSubSeries(10, 9));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void maximumBarCountOnConstrainedSeriesShouldNotThrowExceptionTest() {
         try {
             subSeries.setMaximumBarCount(10);
@@ -285,12 +297,14 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
         }
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @ParameterizedTest
+    @MethodSource("function")
     public void negativeMaximumBarCountShouldThrowExceptionTest() {
-        defaultSeries.setMaximumBarCount(-1);
+        assertThrows(IllegalArgumentException.class, () -> defaultSeries.setMaximumBarCount(-1));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void setMaximumBarCountTest() {
         // Before
         assertEquals(0, defaultSeries.getBeginIndex());
@@ -305,20 +319,23 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
         assertEquals(3, defaultSeries.getBarCount());
     }
 
-    @Test(expected = NullPointerException.class)
+    @ParameterizedTest
+    @MethodSource("function")
     public void addNullBarShouldThrowExceptionTest() {
-        defaultSeries.addBar(null);
+        assertThrows(NullPointerException.class, () -> defaultSeries.addBar(null));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @ParameterizedTest
+    @MethodSource("function")
     public void addBarWithEndTimePriorToSeriesEndTimeShouldThrowExceptionTest() {
-        defaultSeries.addBar(defaultSeries.barBuilder()
+        assertThrows(IllegalArgumentException.class, () -> defaultSeries.addBar(defaultSeries.barBuilder()
                 .endTime(ZonedDateTime.of(2000, 1, 1, 0, 0, 0, 0, ZoneId.systemDefault()))
                 .closePrice(99d)
-                .build());
+                .build()));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void addBarTest() {
         defaultSeries = new BaseBarSeriesBuilder().withNumFactory(numFactory)
                 .withBarBuilderFactory(new MockBarBuilderFactory())
@@ -348,7 +365,8 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
         assertEquals(1, defaultSeries.getEndIndex());
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void addPriceTest() {
         var cp = new ClosePriceIndicator(defaultSeries);
         var mxPrice = new HighPriceIndicator(defaultSeries);
@@ -382,7 +400,8 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
      * Tests if the {@link BaseBarSeries#addTrade(Number, Number)} method works
      * correct.
      */
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void addTradeTest() {
         var series = new BaseBarSeriesBuilder().withNumFactory(numFactory)
                 .withBarBuilderFactory(new MockBarBuilderFactory())
@@ -396,25 +415,28 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
         assertNumEquals(series.numFactory().numOf(100), series.getLastBar().getClosePrice());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @ParameterizedTest
+    @MethodSource("function")
     public void wrongBarTypeDoubleTest() {
         var series = new BaseBarSeriesBuilder().withNumFactory(DoubleNumFactory.getInstance()).build();
-        series.addBar(new BaseBarBuilder().timePeriod(Duration.ofDays(1))
+        assertThrows(IllegalArgumentException.class, () -> series.addBar(new BaseBarBuilder().timePeriod(Duration.ofDays(1))
                 .endTime(ZonedDateTime.now())
                 .closePrice(DecimalNumFactory.getInstance().one())
-                .build());
+                .build()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @ParameterizedTest
+    @MethodSource("function")
     public void wrongBarTypeBigDecimalTest() {
         var series = new BaseBarSeriesBuilder().withNumFactory(DecimalNumFactory.getInstance()).build();
-        series.addBar(new BaseBarBuilder().timePeriod(Duration.ofDays(1))
+        assertThrows(IllegalArgumentException.class, () -> series.addBar(new BaseBarBuilder().timePeriod(Duration.ofDays(1))
                 .endTime(ZonedDateTime.now())
                 .closePrice(DoubleNumFactory.getInstance().one())
-                .build());
+                .build()));
     }
 
-    @Test
+    @ParameterizedTest
+    @MethodSource("function")
     public void subSeriesOfMaxBarCountSeriesTest() {
         final BarSeries series = new BaseBarSeriesBuilder().withNumFactory(numFactory)
                 .withName("Series with maxBar count")

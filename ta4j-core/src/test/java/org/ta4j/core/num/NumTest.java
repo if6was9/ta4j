@@ -25,8 +25,7 @@ package org.ta4j.core.num;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 import static org.ta4j.core.TestUtils.assertNumNotEquals;
 import static org.ta4j.core.num.NaN.NaN;
@@ -42,7 +41,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.Properties;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.indicators.AbstractIndicatorTest;
 
 public class NumTest extends AbstractIndicatorTest<Object, Num> {
@@ -86,9 +85,9 @@ public class NumTest extends AbstractIndicatorTest<Object, Num> {
         assertNumEquals(100, anyDoubleNum.getNumFactory().hundred());
     }
 
-    @Test(expected = AssertionError.class)
+    @Test
     public void testStringNumFail() {
-        assertNumEquals("1.234", numOf(4.321));
+        assertThrows(AssertionError.class, () -> assertNumEquals("1.234", numOf(4.321)));
     }
 
     @Test
@@ -168,28 +167,28 @@ public class NumTest extends AbstractIndicatorTest<Object, Num> {
                 doubleNumFromDouble.multipliedBy(doubleNumFromString));
     }
 
-    @Test(expected = java.lang.ClassCastException.class)
+    @Test
     public void testFailDifferentNumsAdd() {
         Num a = DecimalNum.valueOf(12);
         Num b = DoubleNum.valueOf(12);
-        a.plus(b);
+        assertThrows(ClassCastException.class, () -> a.plus(b));
     }
 
-    @Test(expected = java.lang.ClassCastException.class)
+    @Test
     public void testFailDifferentNumsCompare() {
         Num a = DecimalNum.valueOf(12);
         Num b = DoubleNum.valueOf(13);
-        a.isEqual(b);
+        assertThrows(ClassCastException.class, () -> a.isEqual(b));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testFailNaNtoInt() {
-        NaN.intValue();
+        assertThrows(UnsupportedOperationException.class, () -> NaN.intValue());
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testFailNaNtoLong() {
-        NaN.longValue();
+        assertThrows(UnsupportedOperationException.class, () -> NaN.longValue());
     }
 
     @Test

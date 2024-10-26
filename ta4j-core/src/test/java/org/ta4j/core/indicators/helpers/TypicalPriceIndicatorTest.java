@@ -25,8 +25,8 @@ package org.ta4j.core.indicators.helpers;
 
 import static junit.framework.TestCase.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.Bar;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
@@ -45,7 +45,7 @@ public class TypicalPriceIndicatorTest extends AbstractIndicatorTest<Indicator<N
         super(numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         barSeries = new MockBarSeriesBuilder().withNumFactory(numFactory).withDefaultData().build();
         typicalPriceIndicator = new TypicalPriceIndicator(barSeries);

@@ -33,7 +33,7 @@ import java.math.BigDecimal;
 import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Rule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.rules.TemporaryFolder;
 import org.ta4j.core.Bar;
 import org.ta4j.core.BarSeries;

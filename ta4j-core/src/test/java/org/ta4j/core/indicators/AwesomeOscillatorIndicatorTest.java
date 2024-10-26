@@ -25,8 +25,8 @@ package org.ta4j.core.indicators;
 
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.helpers.MedianPriceIndicator;
@@ -41,7 +41,7 @@ public class AwesomeOscillatorIndicatorTest extends AbstractIndicatorTest<Indica
         super(numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
 
         this.series = new MockBarSeriesBuilder().withNumFactory(numFactory).build();

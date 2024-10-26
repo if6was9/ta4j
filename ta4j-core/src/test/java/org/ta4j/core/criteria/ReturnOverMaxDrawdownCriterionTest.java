@@ -27,8 +27,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.AnalysisCriterion;
 import org.ta4j.core.BaseTradingRecord;
 import org.ta4j.core.Position;
@@ -47,7 +47,7 @@ public class ReturnOverMaxDrawdownCriterionTest extends AbstractCriterionTest {
         super(params -> new ReturnOverMaxDrawdownCriterion(), numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         this.rrc = getCriterion();
     }

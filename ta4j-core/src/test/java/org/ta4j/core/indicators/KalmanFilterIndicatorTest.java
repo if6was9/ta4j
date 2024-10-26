@@ -26,8 +26,8 @@ package org.ta4j.core.indicators;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
 import org.ta4j.core.indicators.helpers.ClosePriceIndicator;
@@ -43,7 +43,7 @@ public class KalmanFilterIndicatorTest extends AbstractIndicatorTest<Indicator<N
         super(numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         var series = new MockBarSeriesBuilder().withNumFactory(numFactory).withData(10, 15, 20, 22, 30, 50).build();
         closePrice = new ClosePriceIndicator(series);

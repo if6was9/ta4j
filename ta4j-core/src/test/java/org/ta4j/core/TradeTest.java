@@ -30,8 +30,8 @@ import static org.junit.Assert.assertTrue;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 import static org.ta4j.core.num.NaN.NaN;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.Trade.TradeType;
 import org.ta4j.core.analysis.cost.LinearTransactionCostModel;
 import org.ta4j.core.mocks.MockBarSeriesBuilder;
@@ -43,7 +43,7 @@ public class TradeTest {
 
     Trade opEquals1, opEquals2, opNotEquals1, opNotEquals2;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         opEquals1 = Trade.buyAt(1, NaN, NaN);
         opEquals2 = Trade.buyAt(1, NaN, NaN);

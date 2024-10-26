@@ -24,13 +24,14 @@
 package org.ta4j.core.indicators;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.Bar;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.Indicator;
@@ -50,7 +51,7 @@ public class RecentSwingLowIndicatorTest extends AbstractIndicatorTest<Indicator
         super(numFunction);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         List<Bar> bars = new ArrayList<>();
         bars.add(new MockBarBuilder(numFactory).openPrice(10).closePrice(10).highPrice(10).lowPrice(10).build()); // 0 -
@@ -256,15 +257,15 @@ public class RecentSwingLowIndicatorTest extends AbstractIndicatorTest<Indicator
         assertNumEquals(5, swingLowIndicator.getValue(movingSeries.getEndIndex()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testConstructor_SurroundingBarsZero() {
-        RecentSwingLowIndicator swingLowIndicator = new RecentSwingLowIndicator(series, 0);
+        assertThrows(IllegalArgumentException.class, () -> new RecentSwingLowIndicator(series, 0));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testConstructor_AllowedEqualBarsNegative() {
-        RecentSwingLowIndicator swingLowIndicator = new RecentSwingLowIndicator(new LowPriceIndicator(series), 1, 1,
-                -1);
+        assertThrows(IllegalArgumentException.class, () -> new RecentSwingLowIndicator(new LowPriceIndicator(series), 1, 1,
+                -1));
     }
 
 }

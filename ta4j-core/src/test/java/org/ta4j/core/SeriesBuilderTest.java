@@ -29,7 +29,7 @@ import static org.ta4j.core.TestUtils.assertNumEquals;
 import java.time.Duration;
 import java.time.ZonedDateTime;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.num.DecimalNum;
 import org.ta4j.core.num.DecimalNumFactory;
 import org.ta4j.core.num.DoubleNum;

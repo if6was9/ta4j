@@ -27,8 +27,8 @@ import static org.ta4j.core.TestUtils.assertNumEquals;
 
 import java.util.function.Function;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
 import org.ta4j.core.BaseBarSeriesBuilder;
 import org.ta4j.core.Indicator;
@@ -50,7 +50,7 @@ public class CombineIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, 
         super(numFactory);
     }
 
-    @Before
+    @BeforeEach
     public void setUp() {
         BarSeries series = new BaseBarSeriesBuilder().withNumFactory(numFactory).build();
         var constantIndicator = new ConstantIndicator<>(series, numOf(4));

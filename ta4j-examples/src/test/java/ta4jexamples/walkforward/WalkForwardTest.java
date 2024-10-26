@@ -23,7 +23,7 @@
  */
 package ta4jexamples.walkforward;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class WalkForwardTest {
 
