@@ -21,40 +21,44 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package org.ta4j.core.rules;
+package org.ta4j.core.indicators.helpers;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.math.BigDecimal;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.ta4j.core.BarSeries;
-import org.ta4j.core.BaseBarSeriesBuilder;
-import org.ta4j.core.indicators.helpers.FixedNumIndicator;
+import org.ta4j.core.num.Num;
 
-public class IsRisingRuleTest {
+/**
+ * A fixed {@code Num} indicator.
+ *
+ * <p>
+ * Returns constant {@link Num} values for a bar.
+ */
+public class FixedNumIndicator extends FixedIndicator<Num> {
 
-    private IsRisingRule rule;
-
-    @BeforeEach
-    public void setUp() {
-        BarSeries series = new BaseBarSeriesBuilder().build();
-        var indicator = new FixedNumIndicator(series, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3);
-        rule = new IsRisingRule(indicator, 3);
+    /**
+     * Constructor.
+     *
+     * @param series the bar series
+     * @param values the values to be returned by this indicator
+     */
+    public FixedNumIndicator(BarSeries series, double... values) {
+        super(series);
+        for (double value : values) {
+            addValue(getBarSeries().numFactory().numOf(value));
+        }
     }
 
-    @Test
-    public void isSatisfied() {
-        assertFalse(rule.isSatisfied(0));
-        assertFalse(rule.isSatisfied(1));
-        assertFalse(rule.isSatisfied(2));
-        // First time to have at least 3 rising values.
-        assertTrue(rule.isSatisfied(3));
-        assertTrue(rule.isSatisfied(4));
-        assertTrue(rule.isSatisfied(5));
-        assertFalse(rule.isSatisfied(6));
-        assertFalse(rule.isSatisfied(7));
-        assertFalse(rule.isSatisfied(8));
-        assertTrue(rule.isSatisfied(9));
+    /**
+     * Constructor.
+     *
+     * @param series the bar series
+     * @param values the values to be returned by this indicator
+     */
+    public FixedNumIndicator(BarSeries series, String... values) {
+        super(series);
+        for (String value : values) {
+            addValue(getBarSeries().numFactory().numOf(new BigDecimal(value)));
+        }
     }
 }

@@ -21,44 +21,23 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package org.ta4j.core.indicators.helpers;
+package org.ta4j.core;
 
-import java.math.BigDecimal;
+public class TickBarBuilderFactory implements BarBuilderFactory {
 
-import org.ta4j.core.BarSeries;
-import org.ta4j.core.num.Num;
+    private final int tickCount;
+    private TickBarBuilder barBuilder;
 
-/**
- * A fixed {@code Num} indicator.
- *
- * <p>
- * Returns constant {@link Num} values for a bar.
- */
-public class FixedDecimalIndicator extends FixedIndicator<Num> {
-
-    /**
-     * Constructor.
-     *
-     * @param series the bar series
-     * @param values the values to be returned by this indicator
-     */
-    public FixedDecimalIndicator(BarSeries series, double... values) {
-        super(series);
-        for (double value : values) {
-            addValue(getBarSeries().numFactory().numOf(value));
-        }
+    public TickBarBuilderFactory(final int tickCount) {
+        this.tickCount = tickCount;
     }
 
-    /**
-     * Constructor.
-     *
-     * @param series the bar series
-     * @param values the values to be returned by this indicator
-     */
-    public FixedDecimalIndicator(BarSeries series, String... values) {
-        super(series);
-        for (String value : values) {
-            addValue(getBarSeries().numFactory().numOf(new BigDecimal(value)));
+    @Override
+    public BarBuilder createBarBuilder(final BarSeries series) {
+        if (this.barBuilder == null) {
+            this.barBuilder = new TickBarBuilder(series.numFactory(), this.tickCount).bindTo(series);
         }
+
+        return this.barBuilder;
     }
 }

@@ -23,7 +23,7 @@
  */
 package org.ta4j.core.indicators.helpers;
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -51,13 +51,14 @@ public class PreviousValueIndicatorTest {
     @BeforeEach
     public void setUp() {
         var r = new Random();
+        var now = Instant.now();
         this.series = new MockBarSeriesBuilder().withName("test").build();
         for (int i = 0; i < 1000; i++) {
             double open = r.nextDouble();
             double close = r.nextDouble();
             double max = Math.max(close + r.nextDouble(), open + r.nextDouble());
             double min = Math.min(0, Math.min(close - r.nextDouble(), open - r.nextDouble()));
-            ZonedDateTime dateTime = ZonedDateTime.now().minusSeconds(1001 - i);
+            Instant dateTime = now.minusSeconds(1001 - i);
             series.barBuilder()
                     .endTime(dateTime)
                     .openPrice(open)
@@ -152,6 +153,7 @@ public class PreviousValueIndicatorTest {
 
     @Test
     public void testPreviousValueIndicatorWithNonPositiveN() {
-        assertThrows(IllegalArgumentException.class, () -> prevValueIndicator = new PreviousValueIndicator(openPriceIndicator, 0));
+        assertThrows(IllegalArgumentException.class,
+                () -> prevValueIndicator = new PreviousValueIndicator(openPriceIndicator, 0));
     }
 }

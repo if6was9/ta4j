@@ -125,7 +125,8 @@ public class PositionTest {
 
     @Test
     public void shouldThrowIllegalArgumentExceptionWhenOrdersHaveSameType() {
-        assertThrows(IllegalArgumentException.class, () -> new Position(Trade.buyAt(0, NaN, NaN), Trade.buyAt(1, NaN, NaN)));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Position(Trade.buyAt(0, NaN, NaN), Trade.buyAt(1, NaN, NaN)));
     }
 
     @Test
@@ -264,12 +265,14 @@ public class PositionTest {
 
     @Test
     public void testCostModelEntryInconsistent() {
-        assertThrows(IllegalArgumentException.class, () -> new Position(enter, exitDifferentType, new ZeroCostModel(), holdingModel));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Position(enter, exitDifferentType, new ZeroCostModel(), holdingModel));
     }
 
     @Test
     public void testCostModelExitInconsistent() {
-        assertThrows(IllegalArgumentException.class, () -> new Position(enter, exitDifferentType, transactionModel, holdingModel));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Position(enter, exitDifferentType, transactionModel, holdingModel));
     }
 
     @Test
