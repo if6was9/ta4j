@@ -26,11 +26,17 @@ package org.ta4j.core.indicators.helpers;
 import static org.ta4j.core.TestUtils.assertNumEquals;
 
 import org.junit.Test;
-import org.ta4j.core.Indicator;
+import org.ta4j.core.*;
 import org.ta4j.core.indicators.AbstractIndicatorTest;
 import org.ta4j.core.mocks.MockBarSeriesBuilder;
+import org.ta4j.core.num.DoubleNumFactory;
 import org.ta4j.core.num.Num;
 import org.ta4j.core.num.NumFactory;
+
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TRIndicatorTest extends AbstractIndicatorTest<Indicator<Num>, Num> {
 

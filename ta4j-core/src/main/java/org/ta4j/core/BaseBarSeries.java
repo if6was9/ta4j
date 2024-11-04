@@ -70,6 +70,15 @@ public class BaseBarSeries implements BarSeries {
      */
     private final boolean constrained;
 
+    /***
+     * Convenience constructor accepting minimum parameters and inferring/defaulting the rest
+     * @param name the name of the bar series
+     * @param bars the list of bars of the bar series
+     */
+    public BaseBarSeries(final String name, final List<Bar> bars) {
+        this(name, bars, 0, bars.size() - 1, false, bars.getFirst().getClosePrice().getNumFactory(), new BaseBarBuilderFactory());
+    }
+
     /**
      * Constructor.
      *
@@ -83,7 +92,7 @@ public class BaseBarSeries implements BarSeries {
      *                          implementation}
      * @param barBuilderFactory factory for creating bars of this series
      */
-    BaseBarSeries(final String name, final List<Bar> bars, final int seriesBeginIndex, final int seriesEndIndex,
+    public BaseBarSeries(final String name, final List<Bar> bars, final int seriesBeginIndex, final int seriesEndIndex,
             final boolean constrained, final NumFactory numFactory, final BarBuilderFactory barBuilderFactory) {
         this.name = name;
         this.numFactory = numFactory;

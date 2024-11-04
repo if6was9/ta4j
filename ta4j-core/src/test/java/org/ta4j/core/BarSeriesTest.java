@@ -36,6 +36,8 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import org.junit.Assert;
@@ -113,6 +115,56 @@ public class BarSeriesTest extends AbstractIndicatorTest<BarSeries, Num> {
         Strategy strategy = new BaseStrategy(new FixedRule(0, 2, 3, 6), new FixedRule(1, 4, 7, 8));
         strategy.setUnstableBars(2); // Strategy would need a real test class
 
+    }
+
+    @Test
+    public void testDefaultConstructorCorrectlySetsProperties() {
+        List<Bar> bars = new ArrayList<>();
+        bars.add(new BaseBar(Duration.ofDays(1), Instant.now(), numOf(0), numOf(15), numOf(8), numOf(12), numOf(1),
+                numOf(1), 0));
+        bars.add(new BaseBar(Duration.ofDays(1), Instant.now(), numOf(0), numOf(11), numOf(6), numOf(8), numOf(1),
+                numOf(1), 0));
+        bars.add(new BaseBar(Duration.ofDays(1), Instant.now(), numOf(0), numOf(17), numOf(14), numOf(15), numOf(1),
+                numOf(1), 0));
+        bars.add(new BaseBar(Duration.ofDays(1), Instant.now(), numOf(0), numOf(17), numOf(14), numOf(15), numOf(1),
+                numOf(1), 0));
+        bars.add(new BaseBar(Duration.ofDays(1), Instant.now(), numOf(0), numOf(0), numOf(2), numOf(0), numOf(1),
+                numOf(1), 0));
+
+        String seriesName = "Series Name";
+        var series = new BaseBarSeries(seriesName, bars, 0, bars.size() - 1, false, numFactory, new BaseBarBuilderFactory());
+
+        assertEquals(seriesName, series.getName());
+        assertEquals(bars.size(), series.getBarCount());
+        assertEquals(0, series.getBeginIndex());
+        assertEquals(bars.size() - 1, series.getEndIndex());
+        assertEquals(series.getFirstBar(), bars.getFirst());
+        assertEquals(series.getLastBar(), bars.getLast());
+    }
+
+    @Test
+    public void testConvenienceConstructorCorrectlySetsProperties() {
+        List<Bar> bars = new ArrayList<>();
+        bars.add(new BaseBar(Duration.ofDays(1), Instant.now(), numOf(0), numOf(15), numOf(8), numOf(12), numOf(1),
+                numOf(1), 0));
+        bars.add(new BaseBar(Duration.ofDays(1), Instant.now(), numOf(0), numOf(11), numOf(6), numOf(8), numOf(1),
+                numOf(1), 0));
+        bars.add(new BaseBar(Duration.ofDays(1), Instant.now(), numOf(0), numOf(17), numOf(14), numOf(15), numOf(1),
+                numOf(1), 0));
+        bars.add(new BaseBar(Duration.ofDays(1), Instant.now(), numOf(0), numOf(17), numOf(14), numOf(15), numOf(1),
+                numOf(1), 0));
+        bars.add(new BaseBar(Duration.ofDays(1), Instant.now(), numOf(0), numOf(0), numOf(2), numOf(0), numOf(1),
+                numOf(1), 0));
+
+        String seriesName = "Series Name";
+        BarSeries series = new BaseBarSeries(seriesName, bars);
+
+        assertEquals(seriesName, series.getName());
+        assertEquals(bars.size(), series.getBarCount());
+        assertEquals(0, series.getBeginIndex());
+        assertEquals(bars.size() - 1, series.getEndIndex());
+        assertEquals(series.getFirstBar(), bars.getFirst());
+        assertEquals(series.getLastBar(), bars.getLast());
     }
 
     /**

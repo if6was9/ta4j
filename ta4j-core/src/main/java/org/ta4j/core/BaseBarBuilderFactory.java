@@ -23,7 +23,7 @@
  */
 package org.ta4j.core;
 
-class BaseBarBuilderFactory implements BarBuilderFactory {
+public class BaseBarBuilderFactory implements BarBuilderFactory {
 
     @Override
     public BaseBarBuilder createBarBuilder(BarSeries series) {
