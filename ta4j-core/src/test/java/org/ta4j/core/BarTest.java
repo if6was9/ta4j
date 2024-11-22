@@ -36,6 +36,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.ta4j.core.indicators.AbstractIndicatorTest;
 import org.ta4j.core.num.Num;
+import org.ta4j.core.num.NaN;
 
 public class BarTest extends AbstractIndicatorTest<BarSeries, Num> {
 
@@ -109,4 +110,16 @@ public class BarTest extends AbstractIndicatorTest<BarSeries, Num> {
 
         assertEquals(bar1.hashCode(), bar2.hashCode());
     }
+
+    @Test
+    public void testToString() {
+        // verify that toString() doesn't throw NPE on null Num values
+        Bar bar1 = new BaseBar(Duration.ofHours(1), endTime, numFunction);
+        assertTrue(bar1.toString()!=null);
+
+        // verify that toString() doesn't throw NPE on NaN
+        bar1 = new BaseBar(Duration.ofHours(1), endTime, NaN.NaN, NaN.NaN, NaN.NaN, NaN.NaN, NaN.NaN, NaN.NaN);
+        assertTrue(bar1.toString()!=null);
+    }
+
 }
